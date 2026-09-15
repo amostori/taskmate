@@ -175,3 +175,11 @@ Upewnij się, że plik .env jest wpisany go .gitignore.
     `env = environ.Env()` 
     `environ.Env.read_env()`    następnie podmień secret_key, debug, database (wszystko oprócz ENGINE) na `env('DJANGO_SECRET_KEY')`
 5. `pip freeze > requirements.txt`
+6. W katalogu z manage.py zainicjuj repo i wyślij je na Githuba.
+
+Railway
+1. W katalogu z manage.py stwórz plik runtime.txt i dodaj 'python-3.10.2'
+2. Install Gunicorn: `pip install gunicorn`
+3. Update requirements.txt
+4. Create Procfile and add,
+`web: python manage.py makemigrations && python manage.py migrate && gunicorn projekt_blog.wsgi`
