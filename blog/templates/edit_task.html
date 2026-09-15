@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Edit task</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+        </br>
+        {% if task.manage == request.user %}
+            <form method="POST" class="form-inline row ">
+                    {% csrf_token %}
+                    <label class="col-lg-2 col-form-label"></label>
+                    {% comment %} name dla inputa pochodzi z formularza TaskForm. Mamy tam pola task i done {% endcomment %}
+                    <input name="task" type="text" class="form-control col-lg-6" placeholder="{{task.task}}" value="{{task.task}}" >
+                    <input name="done" type="hidden" value="{{task.done}}" >
+                    <label class="col-lg-1 col-form-label"></label>
+                    <button type="submit" class="btn btn-primary col-lg-2">Save</button>
+            </form>
+        {% else%}
+            <p>You don't have permission to edit this task.</p>
+        {% endif %}
+        </br>
+        
+
+</div>
+{% endblock content %}
+   
