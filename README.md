@@ -183,3 +183,7 @@ Railway
 3. Update requirements.txt
 4. Create Procfile and add,
 `web: python manage.py makemigrations && python manage.py migrate && gunicorn projekt_blog.wsgi`
+5. Do settings.py dodaj
+`STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')` i zmień ALLOWED_HOSTS:
+`ALLOWED_HOSTS = ["*"]`
+6. `python manage.py collectstatic`
