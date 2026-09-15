@@ -178,12 +178,20 @@ Upewnij się, że plik .env jest wpisany go .gitignore.
 6. W katalogu z manage.py zainicjuj repo i wyślij je na Githuba.
 
 Railway
-1. W katalogu z manage.py stwórz plik runtime.txt i dodaj 'python-3.10.2'
 2. Install Gunicorn: `pip install gunicorn`
+3. Zainstaluj whitenoise: `pip install whitenoise`
 3. Update requirements.txt
 4. Create Procfile and add,
 `web: python manage.py makemigrations && python manage.py migrate && gunicorn projekt_blog.wsgi`
 5. Do settings.py dodaj
-`STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')` i zmień ALLOWED_HOSTS:
-`ALLOWED_HOSTS = ["*"]`
+W sekcji Middlware, zaraz po 'middleware.security':
+`'whitenoise.middleware.WhiteNoiseMiddleware'`
+Poza tym dodaj:
+`STATIC_URL = 'static/'`
+`STATICFILES_DIRS = [BASE_DIR / "static",]`
+`STATIC_ROOT = BASE_DIR / "staticfiles"` i zmień ALLOWED_HOSTS:
+
+`ALLOWED_HOSTS = ["taskmate-production-e8f2.up.railway.app", "localhost", "127.0.0.1"]`
+`CSRF_TRUSTED_ORIGINS = ["https://taskmate-production-e8f2.up.railway.app"]`
+
 6. `python manage.py collectstatic`
