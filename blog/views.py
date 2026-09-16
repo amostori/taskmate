@@ -33,7 +33,7 @@ def delete_task(request, task_id):
         messages.success(request, 'Task added successfully')
     else:
         messages.error(request, 'You don\'t have permission to delete this task.')
-    return redirect('home')
+    return redirect('todolist')
 
 @login_required
 def edit_task(request, task_id):
@@ -43,7 +43,7 @@ def edit_task(request, task_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Task edited successfully')
-            return redirect('home')
+            return redirect('todolist')
     return render(request, 'edit_task.html', {'task': task})
 
 @login_required

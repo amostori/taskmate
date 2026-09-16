@@ -1,31 +1,3 @@
-
-# Taskmate
-
-Taskmate is a task manager web application build using Django Framework. The aim of this project was to understand the working of Django Framework along with it's common features like MVT architecture, working with forms, default authentication, .env files and the deployment process on Railway platform along with PostgreSQL database.
-
-
-## Screenshots
-
-![App Screenshot](https://raw.githubusercontent.com/ShubhamSarda/random-resources/main/images/taskmate-1.png)
-
-![App Screenshot](https://raw.githubusercontent.com/ShubhamSarda/random-resources/main/images/taskmate-2.png)
-
-![App Screenshot](https://raw.githubusercontent.com/ShubhamSarda/random-resources/main/images/taskmate-3.png)
-
-![App Screenshot](https://raw.githubusercontent.com/ShubhamSarda/random-resources/main/images/taskmate-4.png)
-
-## Demo
-
-Deployed on Railway - https://taskmate.up.railway.app/
-
-Username: demo  
-Password: LearnDjango@72
-
-  
-## Documentation
-
-[Official Django Documentation](https://www.djangoproject.com/)
-
 1. Stwórz katalog, a w nim uruchom środowisko wirtualne Pythona:
 `python3 -m venv venv`
 2. Aktywacja środowiska wirtualnego:
@@ -173,14 +145,12 @@ Deployment
 Upewnij się, że plik .env jest wpisany go .gitignore.
 4. W settings.py dodaj 'import environ' oraz
     `env = environ.Env()` 
-    `environ.Env.read_env()`    następnie podmień secret_key, debug, database (wszystko oprócz ENGINE) na `env('DJANGO_SECRET_KEY')`
-5. `pip freeze > requirements.txt`
-6. W katalogu z manage.py zainicjuj repo i wyślij je na Githuba.
+    `environ.Env.read_env()`    następnie podmień secret_key, debug, database (wszystko oprócz ENGINE) na `env('DJANGO_SECRET_KEY')` itp
+
 
 Railway
 2. Install Gunicorn: `pip install gunicorn`
 3. Zainstaluj whitenoise: `pip install whitenoise`
-3. Update requirements.txt
 4. Create Procfile and add,
 `web: python manage.py makemigrations && python manage.py migrate && gunicorn projekt_blog.wsgi`
 5. Do settings.py dodaj
@@ -189,9 +159,19 @@ W sekcji Middlware, zaraz po 'middleware.security':
 Poza tym dodaj:
 `STATIC_URL = 'static/'`
 `STATICFILES_DIRS = [BASE_DIR / "static",]`
-`STATIC_ROOT = BASE_DIR / "staticfiles"` i zmień ALLOWED_HOSTS:
+`STATIC_ROOT = BASE_DIR / "staticfiles"`
+5. `pip freeze > requirements.txt`
+6. `python manage.py collectstatic`
+7. W katalogu z manage.py zainicjuj repo i wyślij je na Githuba.
+
+8. Stwórz nowy projekt na Railway - wybierz 'Deploy from Github' i znajdź
+repo z apką.
+9. Dodaj zmienne środowiskowe: DEBUG, SECRET_KEY, zmienne bazy danych (PGDATABASE, PGUSER, PGPASSWORD, PGHOST, PGPORT)
+10. Dodaj bazę danych Postgres (guzik Create)
+11. Kliknij 'Deploy'. Po szczęśliwym deployment kliknij 'View logs' by sprawdzić czy wszystko ok.
+12. Przejdź do 'Networking' w ustawieniach i kliknij 'Generuj Domain'.
+13. Zmień ALLOWED_HOSTS na adres domeny wygenerowanej:
 
 `ALLOWED_HOSTS = ["taskmate-production-e8f2.up.railway.app", "localhost", "127.0.0.1"]`
 `CSRF_TRUSTED_ORIGINS = ["https://taskmate-production-e8f2.up.railway.app"]`
 
-6. `python manage.py collectstatic`
